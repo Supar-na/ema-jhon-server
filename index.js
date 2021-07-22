@@ -19,7 +19,11 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 client.connect(err => {
   const productsCollection = client.db("emaJhonStore").collection("products");
   const ordersCollection = client.db("emaJhonStore").collection("orders");
+  
 
+  app.get('/',(req,res) =>{
+      res.send('WOW Its Working!!!')
+  })
   app.post('/addProducts',(req,res) =>{
      const product = req.body
      productsCollection.insertOne(product)
@@ -64,4 +68,4 @@ app.post('/addOrder',(req,res) =>{
 });
 
 
-app.listen(port)
+app.listen(process.env.PORT||port)
